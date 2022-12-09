@@ -27,7 +27,7 @@ Feature: all requests related to Chat server
   @GetSingleChatUser
   Scenario: To check the update chat user executes successfully or not
     Given getSingle chat user payload is created
-    When user calls getSingleChatUser request using get method call with user id "196"
+    When user calls getSingleChatUser request using get method call with user id "64"
     Then Chat user Request should be successful with status code "200"
     Then "error" should be a boolean value "false";
-    Then "result.id" should be a Integer value "196";
+    Then "result.id" should be a Integer value "64";

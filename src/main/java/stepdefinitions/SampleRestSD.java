@@ -1,5 +1,6 @@
 package stepdefinitions;
 
+import POJO.SampleUserCreateUpdatePojo;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -12,6 +13,10 @@ import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
 import org.testng.Assert;
 
+import java.io.IOException;
+
+import static POJO.PojoObject.SampleRest.getCreateUserObj;
+import static POJO.PojoObject.SampleRest.getUpdateUserObj;
 import static io.restassured.RestAssured.given;
 import static utility.RequestSpecificationObject.getRequestSpecificationObject;
 
@@ -25,7 +30,7 @@ public class SampleRestSD {
     RequestSpecification getAllUsers;
 
     @Given("Create user payload is created")
-    public void create_user_payload_is_created() {
+    public void create_user_payload_is_created() throws IOException {
 
 
       /*  RequestSpecification requestSpecification = new RequestSpecBuilder()
@@ -39,11 +44,24 @@ public class SampleRestSD {
                         "    \"job\": \"HR\"\n" +
                         "}");*/
 
-        createUserRequest = given().log().all().spec(getRequestSpecificationObject())
+       /* createUserRequest = given().log().all().spec(getRequestSpecificationObject())
                 .body("{\n" +
                         "    \"name\": \"morpheus\",\n" +
                         "    \"job\": \"HR\"\n" +
-                        "}");
+                        "}");*/
+
+       /* SampleUserCreateUpdatePojo ob = new SampleUserCreateUpdatePojo();
+        ob.setName("morpheus1");
+        ob.setJob("HR1");
+
+        createUserRequest = given().log().all().spec(getRequestSpecificationObject())
+                .body(ob);*/
+
+      /*  createUserRequest = given().log().all().spec(getRequestSpecificationObject())
+                .body(getCreateUserObj());*/
+
+        createUserRequest = given().log().all().spec(getRequestSpecificationObject())
+                .body(getCreateUserObj("Amol5","HR5"));
 
     }
     @When("user calls createUser request using POST method call")
@@ -81,13 +99,29 @@ public class SampleRestSD {
     }
 
     @Given("Update user payload is created")
-    public void updateUserPayloadIsCreated() {
+    public void updateUserPayloadIsCreated() throws IOException {
 
-         updateUserRequest = given().log().all().spec(getRequestSpecificationObject())
+
+
+
+  /*       updateUserRequest = given().log().all().spec(getRequestSpecificationObject())
                                     .body("{\n" +
                                             "    \"name\": \"morpheus\",\n" +
                                             "    \"job\": \"zion resident\"\n" +
-                                            "}");
+                                            "}");*/
+
+      /*  SampleUserCreateUpdatePojo ob = new SampleUserCreateUpdatePojo();
+        ob.setName("morpheus2");
+        ob.setJob("HR2");
+
+        updateUserRequest = given().log().all().spec(getRequestSpecificationObject())
+                .body(ob);*/
+
+      /*  updateUserRequest = given().log().all().spec(getRequestSpecificationObject())
+                .body(getUpdateUserObj());*/
+
+        updateUserRequest = given().log().all().spec(getRequestSpecificationObject())
+                .body(getUpdateUserObj("Amol6","HR6"));
     }
 
     @When("user calls updateUser request using PUT method call")
@@ -97,7 +131,7 @@ public class SampleRestSD {
     }
 
     @Given("Delete user payload is created")
-    public void deleteUserPayloadIsCreated() {
+    public void deleteUserPayloadIsCreated() throws IOException {
 
          deleteUserRequest = given().log().all().spec(getRequestSpecificationObject());
     }
@@ -109,7 +143,7 @@ public class SampleRestSD {
     }
 
     @Given("Get All user payload is created")
-    public void getAllUserPayloadIsCreated() {
+    public void getAllUserPayloadIsCreated() throws IOException {
 
          getAllUsers = given().log().all().spec(getRequestSpecificationObject())
                 .queryParam("page", "2");

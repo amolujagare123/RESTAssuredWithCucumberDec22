@@ -1,5 +1,6 @@
 package stepdefinitions;
 
+import POJO.ChatServerCreateUpdatePojo;
 import io.cucumber.cienvironment.internal.com.eclipsesource.json.Json;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -14,6 +15,11 @@ import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
 import org.testng.Assert;
 
+import java.io.IOException;
+import java.util.ArrayList;
+
+import static POJO.PojoObject.ChatServer.getCreateChatUserObj;
+import static POJO.PojoObject.ChatServer.getUpdateChatUserObj;
 import static io.restassured.RestAssured.given;
 import static utility.RequestSpecificationChatServerObject.getChatServerRequestSpecification;
 
@@ -24,10 +30,10 @@ public class ChatUserSD {
     ResponseSpecification responseSpecChatServer;
     String responseStr;
     @Given("create chat user payload is created")
-    public void create_chat_user_payload_is_created() {
+    public void create_chat_user_payload_is_created() throws IOException {
 
 
-         requestSpecChatServer = given().log().all().spec(getChatServerRequestSpecification()).body("{\n" +
+      /*   requestSpecChatServer = given().log().all().spec(getChatServerRequestSpecification()).body("{\n" +
                 "  \"username\": \"anuja\",\n" +
                 "  \"password\": \"anuja123\",\n" +
                 "  \"email\": \"anuja@example.org\",\n" +
@@ -47,7 +53,42 @@ public class ChatUserSD {
                 "  \"user_groups\": [\n" +
                 "    1\n" +
                 "  ]\n" +
-                "}");
+                "}");*/
+
+       /* ChatServerCreateUpdatePojo ob = new ChatServerCreateUpdatePojo();
+        ob.setUsername("priyanka");
+        ob.setPassword("priyanka123");
+        ob.setName("Priyanka");
+        ob.setSurname("xyz");
+        ob.setEmail("priyanka@gmail.com");
+        ob.setChat_nickname("p1234");
+
+        ArrayList<Integer> dept = new ArrayList<Integer>() {{
+            add(1);
+            add(2);
+        }};
+
+        ob.setDepartments(dept);
+
+        ArrayList<Integer> dept_read = new ArrayList<Integer>() {{
+            add(2);
+        }};
+
+        ob.setDepartments_read(dept_read);
+        ArrayList<Integer> dept_groups = new ArrayList<Integer>() {{
+            add(1);
+        }};
+        ob.setDepartment_groups(dept_groups);
+        ArrayList<Integer> user_groups = new ArrayList<Integer>() {{
+            add(1);
+        }};
+
+        ob.setUser_groups(user_groups);
+
+
+        requestSpecChatServer = given().log().all().spec(getChatServerRequestSpecification()).body(ob);
+*/
+        requestSpecChatServer = given().log().all().spec(getChatServerRequestSpecification()).body(getCreateChatUserObj());
 
     }
     @When("user calls createChatUser request using POST method call")
@@ -77,9 +118,9 @@ public class ChatUserSD {
     }
 
     @Given("update chat user payload is created")
-    public void updateChatUserPayloadIsCreated() {
+    public void updateChatUserPayloadIsCreated() throws IOException {
 
-        requestSpecChatServer = given().log().all().spec(getChatServerRequestSpecification()).body("{\n" +
+       /* requestSpecChatServer = given().log().all().spec(getChatServerRequestSpecification()).body("{\n" +
                 "  \"username\": \"anu1234\",\n" +
                 "  \"password\": \"anuja123\",\n" +
                 "  \"email\": \"anuja@example.org\",\n" +
@@ -99,7 +140,11 @@ public class ChatUserSD {
                 "  \"user_groups\": [\n" +
                 "    1\n" +
                 "  ]\n" +
-                "}");
+                "}");*/
+
+        requestSpecChatServer = given().log().all()
+                .spec(getChatServerRequestSpecification()).body(getUpdateChatUserObj());
+
     }
 
     @When("user calls updateChatUser request using PUT method call with user id {string}")
@@ -108,7 +153,7 @@ public class ChatUserSD {
     }
 
     @Given("delete chat user payload is created")
-    public void deleteChatUserPayloadIsCreated() {
+    public void deleteChatUserPayloadIsCreated() throws IOException {
 
         requestSpecChatServer = given().log().all().spec(getChatServerRequestSpecification());
     }
@@ -133,7 +178,7 @@ public class ChatUserSD {
     }
 
     @Given("getSingle chat user payload is created")
-    public void getsingleChatUserPayloadIsCreated() {
+    public void getsingleChatUserPayloadIsCreated() throws IOException {
         requestSpecChatServer = given().log().all().spec(getChatServerRequestSpecification());
     }
 
