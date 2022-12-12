@@ -42,6 +42,43 @@ public class ChatServer {
 
     }
 
+    public static ChatServerCreateUpdatePojo getCreateChatUserObj(String username,String password,
+                                                    String name,String surname,String email,String nickName)
+    {
+        ChatServerCreateUpdatePojo ob = new ChatServerCreateUpdatePojo();
+        ob.setUsername(username);
+        ob.setPassword(password);
+        ob.setName(name);
+        ob.setSurname(surname);
+        ob.setEmail(email);
+        ob.setChat_nickname(nickName);
+
+        ArrayList<Integer> dept = new ArrayList<Integer>() {{
+            add(1);
+            add(2);
+        }};
+
+        ob.setDepartments(dept);
+
+        ArrayList<Integer> dept_read = new ArrayList<Integer>() {{
+            add(2);
+        }};
+
+        ob.setDepartments_read(dept_read);
+        ArrayList<Integer> dept_groups = new ArrayList<Integer>() {{
+            add(1);
+        }};
+        ob.setDepartment_groups(dept_groups);
+        ArrayList<Integer> user_groups = new ArrayList<Integer>() {{
+            add(1);
+        }};
+
+        ob.setUser_groups(user_groups);
+
+        return ob;
+
+    }
+
     public static  ChatServerCreateUpdatePojo getUpdateChatUserObj()
     {
         ChatServerCreateUpdatePojo ob = new ChatServerCreateUpdatePojo();

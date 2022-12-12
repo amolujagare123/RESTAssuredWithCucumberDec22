@@ -154,4 +154,25 @@ public class SampleRestSD {
 
         response = getAllUsers.when().get("/api/users");
     }
+
+
+    @Given("^Create user payload is created with (.+) and (.+)$")
+    public void createUserPayloadIsCreatedWithNameAndJob(String name , String job) throws IOException {
+        createUserRequest = given().log().all().spec(getRequestSpecificationObject())
+                .body(getCreateUserObj(name,job));
+
+    }
+
+
+    @When("user calls {string} request using {string} method call")
+    public void userCallsRequestUsingMethodCall(String requestType, String methodName) {
+
+        switch (requestType)
+        {
+            case "createUser" :  response = createUserRequest.when().post("/api/users"); break;
+            case "updateUser" :  response = updateUserRequest.when().put("/api/users/2"); break;
+            case "deleteUser" :  response = deleteUserRequest.when().delete("/api/users/2"); break;
+            case "getAllUsers" :  response = getAllUsers.when().get("/api/users"); break;
+        }
+    }
 }

@@ -7,6 +7,20 @@ Feature: all requests related to Chat server
     Then Chat user Request should be successful with status code "200"
     Then "result.username" should be "anuja";
 
+  @createChatUserDataProvider
+  Scenario Outline: To check the create chat user executes successfully or not
+    Given create chat user payload is created with <username> , <password> ,<name> ,<surname>,<email>,<nickname>
+    When user calls createChatUser request using POST method call
+    Then Chat user Request should be successful with status code "200"
+       # Then "result.username" should be "anuja";
+    Examples:
+      | username   | password  | name  | surname  | email            | nickname  |
+      | username-1 | password1 | name1 | surname1 | email1@gmail.com | nickname1 |
+      | username-2 | password2 | name2 | surname2 | email2@gmail.com | nickname2 |
+      | username-3 | password2 | name3 | surname3 | email3@gmail.com | nickname3 |
+
+
+
 
   @updateChatUser
   Scenario: To check the update chat user executes successfully or not

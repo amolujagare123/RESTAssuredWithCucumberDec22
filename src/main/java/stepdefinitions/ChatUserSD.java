@@ -91,6 +91,15 @@ public class ChatUserSD {
         requestSpecChatServer = given().log().all().spec(getChatServerRequestSpecification()).body(getCreateChatUserObj());
 
     }
+
+    @Given("^create chat user payload is created with (.+) , (.+) ,(.+) ,(.+),(.+),(.+)$")
+    public void createChatUserPayloadIsCreatedWithUsernamePasswordNameSurnameEmailNickname(String username,String password,
+                                                                                           String name,String surname,String email,String nickName) throws IOException {
+        requestSpecChatServer = given().log().all()
+                .spec(getChatServerRequestSpecification())
+                .body(getCreateChatUserObj(username,password,name,surname,email,nickName));
+
+    }
     @When("user calls createChatUser request using POST method call")
     public void user_calls_create_chat_user_request_using_post_method_call() {
          response = requestSpecChatServer.when().post("/restapi/user");
